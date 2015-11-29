@@ -1,9 +1,13 @@
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
 var express = require('express');
+var handlebars = require('express-handlebars');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var morgan = require('morgan');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -11,51 +15,47 @@ var users = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-app.engine('html', require('ejs').renderFile);
+var view = handlebars.create({ defaultLayout: 'main' });
+app.engine('handlebars', view.engine);
+app.set('view engine', 'handlebars');
+
+// Body Parser:
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Static File Serving
+app.use(express.static(__dirname + '/public'));
+
+// Session Support:
+app.use(session({
+  secret: 'notmuchofasecret',
+  saveUninitialized: false, // doesn't save uninitialized session
+  resave: false // doesn't save session if not modified
+}));
+
+// Flash Support.
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+function notFound404(req, res) {
+    res.status(404);
+    res.render('404');
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+function internalServerError500(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
+}
 
+app.use(notFound404);
+app.use(internalServerError500);
 
 module.exports = app;

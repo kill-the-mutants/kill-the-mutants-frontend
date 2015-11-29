@@ -1,0 +1,29 @@
+{
+  "name": "kill-the-mutants",
+  "description": "Help developers learn to build better tests",
+  "main": "app.js",
+  "authors": [
+    "NateFuller <fatenuller@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "learning",
+    "education",
+    "mutation"
+  ],
+  "homepage": "https://github.com/kill-the-mutants/kill-the-mutants-frontend",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "jquery": "~2.1.4"
+  }
+}

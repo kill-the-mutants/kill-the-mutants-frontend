@@ -1,0 +1,31 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    padding-top: 55px; /* use in order to pad main content below nav-bar */
+    margin-bottom: 60px; /* use for footer */
+    background-color: #343434;
+    color: white;
+}
+body a {
+    text-decoration: none;
+    color: orange;
+}
+body a:hover {
+  text-decoration: none;
+  color: #FF5500;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 10px;
+  border-top: 1px solid white;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+}
+.footer .container {
+    text-align: center;
+}
