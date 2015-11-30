@@ -27,3 +27,6 @@ build/Release
 node_modules
 impact.js
 public/bower_components
+
+#Private files
+lib/api.json

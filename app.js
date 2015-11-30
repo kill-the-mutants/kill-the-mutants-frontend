@@ -9,8 +9,10 @@ var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
+var oauth = require('./routes/oauth');
+
 
 var app = express();
 
@@ -41,8 +43,9 @@ app.use(flash());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/users', users);
+app.use('/oauth', oauth);
 
 function notFound404(req, res) {
     res.status(404);

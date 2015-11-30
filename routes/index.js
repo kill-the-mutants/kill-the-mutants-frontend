@@ -10,4 +10,8 @@ router.get('/about', (req, res) => {
   res.render('about', { title: "About Kill the Mutants" });
 });
 
+router.get('/login', (req, res) => {
+  res.render('/oauth/login', { title: "Login to KTM" });
+});
+
 module.exports = router;
