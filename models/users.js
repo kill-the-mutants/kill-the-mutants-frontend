@@ -4,16 +4,14 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.TEXT,
       primaryKey: true,
+      allowNull: false,
       validate: {
-        isEmail: true,
-        notNull: true
+        isEmail: true
       }
     },
     access_token: {
       type: DataTypes.TEXT,
-      validate: {
-        notNull: true
-      }
+      allowNull: false
     }
   }, {
     classMethods: {
