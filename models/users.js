@@ -21,7 +21,11 @@ module.exports = function(sequelize, DataTypes) {
     lastname: DataTypes.TEXT,
     gender: DataTypes.TEXT,
     age: DataTypes.INTEGER,
-    cs_experience_years: DataTypes.INTEGER
+    exp_level: DataTypes.INTEGER,
+    completed_signup: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    }
   }, {
     classMethods: {
       associate: function(models) {

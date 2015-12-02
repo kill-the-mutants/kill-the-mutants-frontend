@@ -1,0 +1,64 @@
+
+<form class="form-signup" action="/users/complete-signup" method="post">
+  <div class="form-signup-heading">
+    <h2>Sign Up</h2>
+    <small>* indicates a required field</small>
+  </div>
+  <fieldset class="form-group">
+    <label for="inputFirstName">First Name *</label>
+    <input type="text" class="form-control" name="firstname" id="inputFirstName" placeholder="First Name" autofocus required>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputLastName">Last Name</label>
+    <input type="text" class="form-control" name="lastname" id="inputLastName" placeholder="Last Name">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputGender">Gender</label>
+    <select class="form-control" name="gender" id="inputGender">
+      <option></option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+      <option>Prefer not to disclose</option>
+    </select>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="inputAge">Age *</label>
+    <input type="number" class="form-control" id="inputAge" name="age" placeholder="in years" required>
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Your level of software testing expertise *</label>
+    <div class="c-inputs-stacked">
+      <label class="c-input c-radio">
+        <input id="radioStacked1" name="exp-level" type="radio" value="1" required>
+        <span class="c-indicator"></span>
+        I am terrible at testing.
+      </label>
+      <label class="c-input c-radio">
+        <input id="radioStacked2" name="exp-level" value="2" type="radio">
+        <span class="c-indicator"></span>
+        I'm okay at testing, but I have a lot to learn.
+      </label>
+      <label class="c-input c-radio">
+        <input id="radioStacked3" name="exp-level" value="3" type="radio">
+        <span class="c-indicator"></span>
+        I have a neutral understanding of creating tests.
+      </label>
+      <label class="c-input c-radio">
+        <input id="radioStacked4" name="exp-level" value="4" type="radio">
+        <span class="c-indicator"></span>
+        I think I'm pretty good at creating complete test suites.
+      </label>
+      <label class="c-input c-radio">
+        <input id="radioStacked5" name="exp-level" value="5" type="radio">
+        <span class="c-indicator"></span>
+        My test suites are impeccable.
+      </label>
+    </div>
+  </fieldset>
+  <div class="form-signup-submit">
+    <button class="btn btn-lg btn-primary" type="submit">
+      Complete Sign Up
+    </button>
+  </div>
+</form>

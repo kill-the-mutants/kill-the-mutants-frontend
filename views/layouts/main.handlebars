@@ -19,8 +19,8 @@
   <!-- Conidtional CSS/JS for subtemplates -->
   {{#if view_home}}
   <link rel="stylesheet" href="/stylesheets/home.css">
-  {{/if}} {{#if view_login_signup}}
-  <link rel="stylesheet" href="/stylesheets/login_signup.css">
+  {{/if}} {{#if view_signup}}
+  <link rel="stylesheet" href="/stylesheets/signup.css">
   {{/if}}
   <!-- End conditional CSS/JSS -->
 
@@ -48,7 +48,7 @@
           </li>
           <li>
             {{#unless loggedIn}}
-            <a href="/login" role="button">Login or Signup</a>
+            <a href="/oauth/login" role="button">Login or Signup</a>
             {{/unless}}
           </li>
         </ul>

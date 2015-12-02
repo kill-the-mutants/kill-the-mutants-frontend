@@ -19,7 +19,11 @@ module.exports = {
       lastname: DataTypes.TEXT,
       gender: DataTypes.TEXT,
       age: DataTypes.INTEGER,
-      cs_experience_years: DataTypes.INTEGER,
+      exp_level : DataTypes.INTEGER,
+      completed_signup: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

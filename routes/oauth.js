@@ -37,8 +37,12 @@ router.get('/callback', function(req, res) {
     var access_token = data.access_token;
     users.login(access_token, function(user) {
       res.cookie('access_token', data.access_token);
-      req.session.user = user.dataValues;
-      res.redirect('/');
+      req.session.user = user;
+      if (req.session.user.completed_signup) {
+        res.redirect('/');
+      } else {
+        res.redirect('/users/complete-signup');
+      }
     });
   });
 });
