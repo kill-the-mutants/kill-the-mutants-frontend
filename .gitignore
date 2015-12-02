@@ -30,3 +30,6 @@ public/bower_components
 
 #Private files
 lib/api.json
+
+# Weird sequelize generated stuff
+127.0.0.1

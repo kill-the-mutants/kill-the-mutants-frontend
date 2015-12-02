@@ -13,7 +13,7 @@
 
   <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="/stylesheets/style.css" rel="stylesheet">
 
   <!-- Conidtional CSS/JS for subtemplates -->
   {{#if view_home}}
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
         </button>
         <a id="nav-logo" class="navbar-brand" href="/" title="QueueUp Home Page">
-          <i class="fa fa-play-circle"></i><span class="light">KILL THE</span> MUTANTS
+          <i class="fa fa-play-circle"></i> <span class="light">KILL THE</span> MUTANTS
         </a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
@@ -44,7 +44,9 @@
             <a href="/about">About</a>
           </li>
           <li>
-            <a href="/oauth/login" role="button">Connect with GitHub</a>
+            {{#unless loggedIn}}
+            <a href="/oauth/login" role="button">Login with GitHub</a>
+            {{/unless}}
           </li>
         </ul>
       </div><!--/.nav-collapse -->

@@ -6,8 +6,8 @@ var querystring = require('querystring');
 var router = express.Router();
 
 router.get('/login', function(req, res) {
-  var hostname = req.headers.host; // hostname = 'localhost:8080'
-  var uri = 'http://'+hostname+'/oauth/callback'; // pathname = '/MyApp'
+  var hostname = req.headers.host;
+  var uri = 'http://'+hostname+'/oauth/callback';
 
   var query = {
     client_id : tokens.GITHUB_CLIENT_ID,
@@ -21,11 +21,11 @@ router.get('/login', function(req, res) {
 router.get('/callback', function(req, res) {
   var error = req.query.error;
   if(error) {
-    res.render('500', { title : error });
+    res.render('500', { error : error });
   }
 
-  var hostname = req.headers.host; // hostname = 'localhost:8080'
-  var uri = 'http://'+hostname+'/oauth/callback'; // pathname = '/MyApp'
+  var hostname = req.headers.host;
+  var uri = 'http://'+hostname+'/oauth/callback';
   var code = req.query.code;
 
   var authenticationInformation = {
