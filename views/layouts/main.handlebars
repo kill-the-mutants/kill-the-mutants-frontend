@@ -13,11 +13,14 @@
 
   <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="/bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
   <link href="/stylesheets/style.css" rel="stylesheet">
 
   <!-- Conidtional CSS/JS for subtemplates -->
   {{#if view_home}}
   <link rel="stylesheet" href="/stylesheets/home.css">
+  {{/if}} {{#if view_login_signup}}
+  <link rel="stylesheet" href="/stylesheets/login_signup.css">
   {{/if}}
   <!-- End conditional CSS/JSS -->
 
@@ -45,7 +48,7 @@
           </li>
           <li>
             {{#unless loggedIn}}
-            <a href="/oauth/login" role="button">Login with GitHub</a>
+            <a href="/login" role="button">Login or Signup</a>
             {{/unless}}
           </li>
         </ul>

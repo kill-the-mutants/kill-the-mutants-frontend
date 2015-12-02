@@ -1,0 +1,26 @@
+#login-signup {
+  border-radius: 5px;
+  border: solid 2px #9FA8DA;
+  background-color: rgba(40, 53, 147, 0.45);
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.row > .col-md-6 {
+  text-align: center;
+}
+
+#login {
+  padding: 20px;
+  border-right: solid 1px #9FA8DA;
+}
+
+#signup {
+  padding: 20px;
+  border-left: solid 1px #9FA8DA;
+}

@@ -12,7 +12,8 @@ router.get('/about', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.redirect('/oauth/login');
+  res.locals.view_login_signup = true;
+  res.render('login', { title: "KTM Login" });
 });
 
 module.exports = router;

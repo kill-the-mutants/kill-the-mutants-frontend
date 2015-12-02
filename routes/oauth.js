@@ -35,8 +35,9 @@ router.get('/callback', function(req, res) {
 
   github.requestToken(authenticationInformation, function(data) {
     var access_token = data.access_token;
-    users.login(access_token, function() {
+    users.login(access_token, function(user) {
       res.cookie('access_token', data.access_token);
+      req.session.user = user.dataValues;
       res.redirect('/');
     });
   });

@@ -28,12 +28,26 @@ app.use(bodyParser.json());
 // Static File Serving
 app.use(express.static(__dirname + '/public'));
 
+// Middleware to set a variable accessible from front end representing
+// whether the current session user is logged in or not.
+function loggedIn(req, res, next) {
+    res.locals.loggedIn = false;
+    if (req.session.user) {
+        res.locals.loggedIn = true;
+        res.locals.username = req.session.user.name;
+    }
+    next();
+}
+
 // Session Support:
 app.use(session({
   secret: 'notmuchofasecret',
   saveUninitialized: false, // doesn't save uninitialized session
   resave: false // doesn't save session if not modified
 }));
+
+// Custom Middleware
+app.use(loggedIn);
 
 // Flash Support.
 app.use(flash());
