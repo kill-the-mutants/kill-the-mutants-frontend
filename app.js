@@ -34,7 +34,7 @@ function loggedIn(req, res, next) {
     res.locals.loggedIn = false;
     if (req.session.user) {
         res.locals.loggedIn = true;
-        res.locals.username = req.session.user.name;
+        res.locals.username = req.session.user.login;
     }
     next();
 }

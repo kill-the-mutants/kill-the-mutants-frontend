@@ -15,14 +15,14 @@ router.get('/about', function(req, res) {
   res.locals.view_about = true;
   res.render('about', { title: "About Kill the Mutants" });
 });
-//
-// router.get('/test', function(req, res) {
-//   res.locals.view_signup = true;
-//   res.render('signup', { title: "Complete Your KTM Signup" });
-// });
 
 router.get('/login', function(req, res) {
   res.redirect('/oauth/login');
+});
+
+router.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
 });
 
 module.exports = router;

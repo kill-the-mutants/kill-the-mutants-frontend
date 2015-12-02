@@ -1,4 +1,5 @@
 var express = require('express');
+var users = require('../lib/users');
 var router = express.Router();
 
 router.get('/complete-signup', function(req, res) {
@@ -12,8 +13,27 @@ router.get('/complete-signup', function(req, res) {
 });
 
 router.post('/complete-signup', function(req, res) {
-  console.log(req.body);
-  res.redirect('/');
+  var user = req.session.user;
+  if (!user || user.completed_signup) {
+    res.redirect('/');
+  } else {
+    var options = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      gender: req.body.gender,
+      age: req.body.age,
+      exp_level: req.body['exp-level'],
+      completed_signup: true
+    };
+    users.updateUser(user.login, options, function(err, user) {
+      if(err) {
+        res.render('500', {error: err});
+      } else {
+        req.session.user = user.dataValues;
+        res.redirect('/');
+      }
+    });
+  }
 });
 
 module.exports = router;

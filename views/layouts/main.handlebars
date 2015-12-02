@@ -46,11 +46,18 @@
           <li>
             <a href="/about">About</a>
           </li>
+          {{#unless loggedIn}}
           <li>
-            {{#unless loggedIn}}
-            <a href="/oauth/login" role="button">Login or Signup</a>
-            {{/unless}}
+            <a href="/login">Login or Signup</a>
           </li>
+          {{else}}
+          <li>
+            <a href="#">{{username}}</a>
+          </li>
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+          {{/unless}}
         </ul>
       </div><!--/.nav-collapse -->
     </div>

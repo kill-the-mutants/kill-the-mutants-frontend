@@ -6,22 +6,41 @@ var querystring = require('querystring');
 var router = express.Router();
 
 router.get('/login', function(req, res) {
-  var hostname = req.headers.host;
-  var uri = 'http://'+hostname+'/oauth/callback';
+  var user = req.session.user;
 
-  var query = {
-    client_id : tokens.GITHUB_CLIENT_ID,
-    redirect_uri : uri,
-    scope : 'user,public_repo'
-  };
+  if (!user) {
+    var hostname = req.headers.host;
+    var uri = 'http://'+hostname+'/oauth/callback';
 
-  res.redirect('https://github.com/login/oauth/authorize?' + querystring.stringify(query));
+    var query = {
+      client_id : tokens.GITHUB_CLIENT_ID,
+      redirect_uri : uri,
+      scope : 'user,public_repo'
+    };
+
+    res.redirect('https://github.com/login/oauth/authorize?' + querystring.stringify(query));
+  } else {
+    res.redirect('/');
+  }
 });
 
 router.get('/callback', function(req, res) {
+  var user = req.session.user;
+
+  if (user) {
+    res.redirect('/');
+    return; // doing this to avoid lots of else statements and confusing braces
+  }
+
   var error = req.query.error;
   if(error) {
     res.render('500', { error : error });
+    return;
+  }
+  
+  if (!req.query.code) {
+    res.render('500', { error : "Code not provided for accessing GitHub OAuth." });
+    return;
   }
 
   var hostname = req.headers.host;
