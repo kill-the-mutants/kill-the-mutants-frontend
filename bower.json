@@ -25,6 +25,7 @@
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.5.0",
     "jquery": "~2.1.4",
-    "bootstrap-social": "~4.11.0"
+    "bootstrap-social": "~4.11.0",
+    "ace-builds": "~1.2.2"
   }
 }

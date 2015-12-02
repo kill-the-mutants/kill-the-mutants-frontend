@@ -1,0 +1,8 @@
+#editor {
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  border: solid 2px #0D47A1;
+  background-color: RGBA(0, 34, 64, 0.75);
+  border-radius: 8px;
+}

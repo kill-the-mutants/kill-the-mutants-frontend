@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="/stylesheets/home.css">
   {{/if}} {{#if view_signup}}
   <link rel="stylesheet" href="/stylesheets/signup.css">
+  {{/if}} {{#if view_game}}
+  <link rel="stylesheet" href="/stylesheets/game.css">
   {{/if}}
   <!-- End conditional CSS/JSS -->
 
@@ -43,20 +45,12 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="/about">About</a>
-          </li>
+          <li><a href="/about">About</a></li>
           {{#unless loggedIn}}
-          <li>
-            <a href="/login">Login or Signup</a>
-          </li>
+          <li><a href="/login">Login or Signup</a></li>
           {{else}}
-          <li>
-            <a href="#">{{username}}</a>
-          </li>
-          <li>
-            <a href="/logout">Logout</a>
-          </li>
+          <li><a href="#">{{username}}</a></li>
+          <li><a href="/logout">Logout</a></li>
           {{/unless}}
         </ul>
       </div><!--/.nav-collapse -->
@@ -75,6 +69,11 @@
 
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  {{#if view_game}}
+  <script src="/bower_components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/ace-init.js"></script>
+  <script src="/javascripts/game.js"></script>
+  {{/if}}
 
 </body>
 

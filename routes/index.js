@@ -5,6 +5,8 @@ router.get('/', function(req, res) {
   var user = req.session.user;
   if (user && !user.completed_signup) {
     res.redirect('/users/complete-signup');
+  } else if (user && user.completed_signup){
+    res.redirect('/game');
   } else {
     res.locals.view_home = true;
     res.render('home', { title: "Kill the Mutants" });

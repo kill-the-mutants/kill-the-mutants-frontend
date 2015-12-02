@@ -12,7 +12,7 @@ var morgan = require('morgan');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var oauth = require('./routes/oauth');
-
+var game = require('./routes/game');
 
 var app = express();
 
@@ -60,6 +60,7 @@ app.use(cookieParser());
 app.use('/', index);
 app.use('/users', users);
 app.use('/oauth', oauth);
+app.use('/game', game);
 
 function notFound404(req, res) {
     res.status(404);
