@@ -2,15 +2,24 @@
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.createTable('Users', {
+      login: {
+        primaryKey: true,
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
       email: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.TEXT
       },
       access_token: {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      firstname: DataTypes.TEXT,
+      lastname: DataTypes.TEXT,
+      gender: DataTypes.TEXT,
+      age: DataTypes.INTEGER,
+      cs_experience_years: DataTypes.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
