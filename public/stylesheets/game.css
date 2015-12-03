@@ -1,8 +1,21 @@
+#workspace {
+  max-width:600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: RGBA(0, 22, 42, 1);
+  border: solid 2px #0D47A1;
+  border-radius: 8px;
+}
+#code-snippet {
+  border: solid 2px #0D47A1;
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
 #editor {
-  width: 600px;
-  height: 400px;
   margin: 0 auto;
   border: solid 2px #0D47A1;
-  background-color: RGBA(0, 34, 64, 0.75);
   border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
