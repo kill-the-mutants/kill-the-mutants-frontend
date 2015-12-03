@@ -17,9 +17,9 @@ router.get('/login', function(req, res) {
       redirect_uri : uri,
       scope : 'user,public_repo'
     };
-
     res.redirect('https://github.com/login/oauth/authorize?' + querystring.stringify(query));
   } else {
+    console.log('Already logged in');
     res.redirect('/');
   }
 });
@@ -37,7 +37,7 @@ router.get('/callback', function(req, res) {
     res.render('500', { error : error });
     return;
   }
-  
+
   if (!req.query.code) {
     res.render('500', { error : "Code not provided for accessing GitHub OAuth." });
     return;
