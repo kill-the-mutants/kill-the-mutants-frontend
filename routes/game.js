@@ -17,28 +17,51 @@ router.get('/example:num', function(req, res) {
     var repo = {
       owner: user.login,
       repo: 'kill-the-mutants',
-      path: 'example' + exampleNumber + '/Snippet.java'
+      path: 'example' + exampleNumber
     };
 
-    github.getFileContents(user.access_token, repo, function(contents) {
-      if (contents.message === 'Not Found') {
+    // THIS IS TERRIBLY WRITTEN CODE
+    // But I can not, for the life of me, think of how else to request the bodies
+    // of two separate remote files since everything's asynchronous.
+
+    // Get the URLs to Tests.java and Snippet.java raw source code files in GitHub.
+    // files: a json object containing the URLs to the source code for Tests.java and Snippet.java
+    github.getExampleContents(user.access_token, repo, function(error, files) {
+      if (error) {
         res.status(404);
-        res.render('404', { error: "This example doesn't exist." });
+        res.render('404', { error: error });
         return;
       }
-      request.get(contents.download_url, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          res.locals.view_game = true;
-          res.render('game', {
-            title: 'Kill the Mutants',
-            skeleton: body
+      // replace repo's path value with that of the testsFile we want to obtain the URL of
+      repo.path = files.testsFile.path;
+      github.getFileContents(user.access_token, repo, function(testsErr, testsResponse) {
+        // replace repo's path value with taht of the snippetFile we want to obtain the URL of
+        repo.path = files.snippetFile.path;
+
+        github.getFileContents(user.access_token, repo, function(snippetErr, snippetResponse) {
+          if (testsErr || snippetErr) {
+            res.status(404);
+            res.render('404', { error: testsErr || snippetErr });
+            return;
+          }
+          request.get(testsResponse.download_url, function(testsErr, testsResponse, testsBody) {
+            request.get(snippetResponse.download_url, function(snippetErr, snippetResponse, snippetBody) {
+              if (!testsErr && !snippetErr && testsResponse.statusCode == 200 && snippetResponse.statusCode == 200) {
+                res.locals.view_game = true;
+                res.render('game', {
+                  title: 'Kill the Mutants',
+                  tests: testsBody,
+                  snippet: snippetBody
+                });
+              } else {
+                res.status(500);
+                res.render('500', { error: "Oh no! An error occurred obtaining the example you've requested." });
+              }
+            });
           });
-        } else {
-          res.status(500);
-          res.render('500', { error: "Oh no! An error occurred obtaining the example you've requested =(" });
-        }
+        });
       });
-    });
+    }); // END TERRIBLY WRITTEN CODE
   } else if (user && !user.completed_signup) {
     res.redirect('/users/complete-signup');
   } else {

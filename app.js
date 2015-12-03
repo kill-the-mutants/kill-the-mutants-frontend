@@ -70,7 +70,7 @@ function notFound404(req, res) {
 function internalServerError500(err, req, res, next) {
     console.error(err.stack);
     res.status(500);
-    res.render('500');
+    res.render('500', { error: err });
 }
 
 app.use(notFound404);
