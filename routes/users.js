@@ -25,9 +25,9 @@ router.post('/complete-signup', function(req, res) {
       exp_level: req.body['exp-level'],
       completed_signup: true
     };
-    users.updateUser(user.login, options, function(err, user) {
+    users.updateUser(user.login, options, function(user, err) {
       if(err) {
-        res.render('500', {error: err});
+        res.render('500', {error: JSON.stringify(err)});
       } else {
         req.session.user = user.dataValues;
         res.redirect('/');
