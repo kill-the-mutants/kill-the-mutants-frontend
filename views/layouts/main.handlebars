@@ -20,9 +20,12 @@
   {{#if view_home}}
   <link rel="stylesheet" href="/stylesheets/home.css">
   {{/if}} {{#if view_signup}}
+  <link rel="stylesheet" href="/stylesheets/floating-form.css">
   <link rel="stylesheet" href="/stylesheets/signup.css">
   {{/if}} {{#if view_game}}
   <link rel="stylesheet" href="/stylesheets/game.css">
+  {{/if}} {{#if view_survey}}
+  <link rel="stylesheet" href="/stylesheets/floating-form.css">
   {{/if}}
   <!-- End conditional CSS/JSS -->
 
@@ -73,6 +76,8 @@
   <script src="/bower_components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/ace-init.js"></script>
   <script src="/javascripts/game.js"></script>
+  {{/if}} {{#if view_survey}}
+  <script src="/javascripts/survey.js"></script>
   {{/if}}
 
 </body>

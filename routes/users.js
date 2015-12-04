@@ -36,4 +36,23 @@ router.post('/complete-signup', function(req, res) {
   }
 });
 
+router.get('/pre-survey', function(req, res) {
+  var user = req.session.user;
+  if (!user) {
+    res.redirect('/');
+  } else if (user && !user.completed_signup) {
+    res.redirect('/users/complete-signup');
+  } else {
+    res.locals.view_survey = true;
+    res.render('pre-survey', {
+      title: "KTM - Entry Survey",
+    });
+  }
+});
+
+router.post('/pre-survey', function(req, res) {
+  // TODO: Save results to DB
+  res.redirect('/');
+});
+
 module.exports = router;

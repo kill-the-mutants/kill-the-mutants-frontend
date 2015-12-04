@@ -1,0 +1,46 @@
+.form-floating {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: rgba(40, 53, 147, 1);
+  border: solid 2px #C5CAE9;
+  border-radius: 8px;
+}
+.form-floating .form-floating-heading {
+  margin-bottom: 10px
+}
+.form-floating .form-floating-heading h2 {
+  margin-bottom: 0px;
+}
+.form-floating .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-floating .form-control:focus {
+  z-index: 2;
+}
+.form-floating .form-floating-submit {
+  text-align: center;
+}
+.form-floating .form-floating-submit .btn {
+  border: 0;
+  background-color: #304FFE;
+}
+.form-floating .form-floating-submit .btn:hover {
+  border: 0;
+  background-color: #536DFE;
+}
+.c-inputs-stacked .c-input {
+  display: block;
+}
+textarea.toggle {
+  display: none;
+}
+textarea {
+  resize: vertical;
+}
