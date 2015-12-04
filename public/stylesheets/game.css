@@ -1,21 +1,42 @@
 #workspace {
-  max-width:600px;
-  margin: 0 auto;
   padding: 20px;
   background-color: RGBA(0, 22, 42, 1);
   border: solid 2px #0D47A1;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 #code-snippet {
   border: solid 2px #0D47A1;
   border-radius: 8px;
-  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 #editor {
-  margin: 0 auto;
   border: solid 2px #0D47A1;
   border-radius: 8px;
   border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#toolbar {
+  text-align: center;
+}
+#toolbar button {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+  background-color: #E65100;
+  border-color: #E65100;
+}
+#toolbar button:hover {
+  color: black;
+}
+#toolbar button:active {
+  background-color: #D64100;
+  border-color: #D64100;
+}
+#toolbar button:focus {
+  outline:0;
+}
+.ace_search_form {
+  color: black;
 }
