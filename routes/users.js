@@ -29,7 +29,7 @@ router.post('/complete-signup', function(req, res) {
       if(err) {
         res.render('500', {error: JSON.stringify(err)});
       } else {
-        req.session.user = user.dataValues;
+        req.session.user = user;
         res.redirect('/');
       }
     });
