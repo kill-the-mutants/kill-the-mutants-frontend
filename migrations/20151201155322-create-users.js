@@ -24,6 +24,18 @@ module.exports = {
         type: DataTypes.BOOLEAN,
         allowNull: false
       },
+      completed_presurvey: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      completed_postsurvey: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
+      completed_all_tests: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      }
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

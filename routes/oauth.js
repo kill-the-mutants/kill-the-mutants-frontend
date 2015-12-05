@@ -57,10 +57,12 @@ router.get('/callback', function(req, res) {
     users.login(access_token, function(user) {
       res.cookie('access_token', data.access_token);
       req.session.user = user;
-      if (req.session.user.completed_signup) {
-        res.redirect('/');
-      } else {
+      if (!user.completed_signup) {
         res.redirect('/users/complete-signup');
+      } else if (!user.completed_presurvey) {
+        res.redirect('/users/pre-survey');
+      } else {
+        res.redirect('/');
       }
     });
   });

@@ -30,7 +30,11 @@ router.post('/complete-signup', function(req, res) {
         res.render('500', {error: JSON.stringify(err)});
       } else {
         req.session.user = user;
-        res.redirect('/');
+        if (!user.completed_presurvey) {
+          res.redirect('/users/pre-survey');
+        } else {
+          res.redirect('/game');
+        }
       }
     });
   }
@@ -40,7 +44,7 @@ router.get('/pre-survey', function(req, res) {
   var user = req.session.user;
   if (!user) {
     res.redirect('/');
-  } else if (user && !user.completed_signup) {
+  } else if (!user.completed_signup) {
     res.redirect('/users/complete-signup');
   } else {
     res.locals.view_survey = true;
@@ -51,8 +55,24 @@ router.get('/pre-survey', function(req, res) {
 });
 
 router.post('/pre-survey', function(req, res) {
-  // TODO: Save results to DB
-  res.redirect('/');
+  var user = req.session.user;
+  if (!user) {
+    res.redirect('/');
+  } else if (!user.completed_signup) {
+    res.redirect('/complete-signup');
+  } else {
+    var options = {
+      completed_presurvey: true
+    };
+    users.updateUser(user.login, options, function(user, err) {
+      if(err) {
+        res.render('500', {error: JSON.stringify(err)});
+      } else {
+        req.session.user = user;
+        res.redirect('/game');
+      }
+    });
+  }
 });
 
 router.get('/post-survey', function(req, res) {
@@ -67,6 +87,11 @@ router.get('/post-survey', function(req, res) {
       title: "KTM - Post Usage Survey",
     });
   }
+});
+
+router.post('/post-survey', function(req, res) {
+  console.log(req.body);
+  res.redirect('/');
 });
 
 module.exports = router;
