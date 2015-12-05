@@ -35,7 +35,7 @@ module.exports = {
       completed_all_tests: {
         type: DataTypes.BOOLEAN,
         allowNull: false
-      }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

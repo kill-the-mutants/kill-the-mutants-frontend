@@ -37,6 +37,7 @@
 }
 .c-inputs-stacked .c-input {
   display: block;
+  font-weight: normal;
 }
 textarea.toggle {
   display: none;
