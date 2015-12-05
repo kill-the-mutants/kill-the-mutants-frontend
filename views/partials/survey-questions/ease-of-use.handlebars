@@ -1,0 +1,17 @@
+<fieldset class="form-group">
+  <label>On a scale of 1 to 10, 1 being totally unusable and 10 being a very pleasurable user experience, how easy was Kill The Mutants to use? *</label>
+  <div id="ease-of-use" class="c-inputs-stacked">
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      for (var i = 0; i < 10; i++) {
+        $('#ease-of-use').append("<label class='c-input c-radio'>" +
+          "<input id='exp-level" + (i + 1) + "' name='exp-level' type='radio' value='" + (i + 1) + "' required>" +
+          "<span class='c-indicator'></span> " +
+          (i + 1) +
+        "</label>");
+      }
+    });
+    </script>
+  </div>
+</fieldset>

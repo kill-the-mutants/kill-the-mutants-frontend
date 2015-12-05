@@ -1,0 +1,18 @@
+<form class="form-floating" action="/users/complete-post-survey" method="post">
+  <div class="form-floating-heading">
+    <h2>Kill The Mutants: Post Usage Survey</h2>
+    <small>* indicates a required field</small>
+  </div>
+  {{> survey-questions/post-experience}}
+  {{> survey-questions/what-did-you-learn}}
+  {{> survey-questions/mutation-in-future}}
+  {{> survey-questions/favorite-snippet}}
+  {{> survey-questions/future-snippets}}
+  {{> survey-questions/ease-of-use}}
+  {{> survey-questions/overall-feedback}}
+  <div class="form-floating-submit">
+    <button class="btn btn-lg btn-primary" type="submit">
+      Complete Survey
+    </button>
+  </div>
+</form>

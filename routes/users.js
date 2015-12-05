@@ -55,4 +55,18 @@ router.post('/pre-survey', function(req, res) {
   res.redirect('/');
 });
 
+router.get('/post-survey', function(req, res) {
+  var user = req.session.user;
+  if (!user) {
+    res.redirect('/');
+  } else if (user && !user.completed_signup) {
+    res.redirect('/users/complete-signup');
+  } else {
+    res.locals.view_survey = true;
+    res.render('post-survey', {
+      title: "KTM - Post Usage Survey",
+    });
+  }
+});
+
 module.exports = router;
