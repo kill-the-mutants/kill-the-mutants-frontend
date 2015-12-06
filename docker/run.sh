@@ -26,7 +26,8 @@ if [ "$GIT_PUSH" = true ]; then
     exit 0
   fi
 
-  # setup credentials
+  # setup git configuration
+  git config --global push.default simple
   git config --global user.name ${NAME}
   git config --global user.email ${EMAIL}
 
