@@ -56,7 +56,7 @@ router.get('/pre-survey', function(req, res) {
 
 router.post('/pre-survey', function(req, res) {
   var user = req.session.user;
-  if (!user) {
+  if (!user || user.completed_presurvey) {
     res.redirect('/');
   } else if (!user.completed_signup) {
     res.redirect('/complete-signup');
