@@ -15,25 +15,25 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      firstname: DataTypes.TEXT,
-      lastname: DataTypes.TEXT,
-      gender: DataTypes.TEXT,
-      age: DataTypes.INTEGER,
-      exp_level : DataTypes.INTEGER,
+      firstname: Sequelize.TEXT,
+      lastname: Sequelize.TEXT,
+      gender: Sequelize.TEXT,
+      age: Sequelize.INTEGER,
+      exp_level : Sequelize.INTEGER,
       completed_signup: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       completed_presurvey: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       completed_postsurvey: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       completed_all_tests: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       createdAt: {

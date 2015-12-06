@@ -1,6 +1,7 @@
 var express = require('express');
 var game = require('../lib/game');
 var docker = require('../lib/docker');
+var results = require('../lib/results');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -64,11 +65,18 @@ router.post('/mutation-test', function(req, res) {
   var code = req.body.code;
   var testname = req.body.testname;
 
-  docker.execute(user, 'example1', true, 'pit', code, function(stdout, stderr) {
-    res.send({
-      code: code,
-      stdout: stdout,
-      stderr: stderr
+  docker.execute(user, 'example1', true, 'pit', code, function(docker_arguments, stdout, stderr) {
+    console.log('docker_arguments', docker_arguments)
+
+    // mutation testing was run; add to the database
+    results.store_results(user, 'example1', code, docker_arguments, stdout, stderr, function(db_output, err){
+      res.send({
+        code: code,
+        stdout: stdout,
+        stderr: stderr,
+        db_output: db_output,
+        err: err
+      });
     });
   });
 });
