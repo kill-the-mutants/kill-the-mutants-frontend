@@ -1,14 +1,27 @@
-<div id="workspace">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--6-col">
-      <div class="mdl-card mdl-shadow--2dp">
-        <div id="code-snippet">{{snippet}}</div>
+<div id="workspace" class="mdl-grid">
+  <div id="snippet-console-container" class="mdl-cell mdl-cell--6-col">
+    <div id="snippet-container" class="divided-container">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <div id="snippet-card" class="mdl-card mdl-shadow--2dp editor-color">
+            <div id="code-snippet">{{snippet}}</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="mdl-cell mdl-cell--6-col">
-      <div class="mdl-card mdl-shadow--2dp">
-        <div id="editor">{{tests}}</div>
+    <div id="console-container" class="divided-container">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <div id="console-card" class="mdl-card mdl-shadow--2dp editor-color">
+            <div id="console">YOOO</div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <div id="editor-container" class="mdl-cell mdl-cell--6-col">
+    <div id="editor-card" class="mdl-card mdl-shadow--2dp editor-color">
+      <div id="editor">{{tests}}</div>
     </div>
   </div>
 </div>
