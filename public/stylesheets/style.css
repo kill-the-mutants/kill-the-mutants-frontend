@@ -4,6 +4,9 @@ html {
 }
 body {
   color: white;
+  background-image: url("/images/intro-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 a.mdl-layout-title {
   text-decoration:none;
@@ -15,11 +18,4 @@ a.mdl-navigation__link:hover {
 }
 .mdl-layout__header .mdl-layout__drawer-button {
   background-color: transparent;
-}
-main {
-  padding: 10px;
-
-  background-image: url("/images/intro-bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
