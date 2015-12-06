@@ -3,39 +3,23 @@ html {
     min-height: 100%;
 }
 body {
-    padding-top: 55px; /* use in order to pad main content below nav-bar */
-    margin-bottom: 60px; /* use for footer */
-    background-image: url("/images/intro-bg.jpg");
-    background-color: #000030;
-    color: #C5CAE9;
+  color: white;
 }
-body a {
-    text-decoration: none;
-    color: white;
+a.mdl-layout-title {
+  text-decoration:none;
+  color: white;
 }
-body a:hover {
+a.mdl-navigation__link:hover {
   text-decoration: none;
-  color: orange;
+  color: #FFAB40;
 }
-.navbar {
-  background-color: #000030;
+.mdl-layout__header .mdl-layout__drawer-button {
+  background-color: transparent;
 }
-.navbar a{
-  color: #C5CAE9 !important;
-}
-.navbar a:hover {
-  color: white !important;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding-top: 10px;
-  border-top: 1px solid rgba(197, 202, 233, 0.5);
-  color: rgba(197, 202, 233, 0.5);
-  /* Set the fixed height of the footer here */
-  height: 40px;
-}
-.footer .container {
-    text-align: center;
+main {
+  padding: 10px;
+
+  background-image: url("/images/intro-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

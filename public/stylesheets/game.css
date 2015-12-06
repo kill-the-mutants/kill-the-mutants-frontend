@@ -1,21 +1,28 @@
+.mdl-layout__content {
+  display: flex;
+}
+
 #workspace {
-  padding: 20px;
-  background-color: RGBA(0, 22, 42, 1);
-  border: solid 2px #0D47A1;
-  border-radius: 16px;
+  display: flex;
+  flex-grow: 1;
 }
-#code-snippet {
-  border: solid 2px #0D47A1;
-  border-radius: 8px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+
+#workspace > .mdl-grid {
+  display: flex;
+  flex-grow: 1;
 }
-#editor {
-  border: solid 2px #0D47A1;
-  border-radius: 8px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+
+.mdl-card {
+  width: 100%;
 }
+
+.mdl-navigation.toolbar {
+  padding: 0 10px;
+}
+.toolbar .mdl-navigation__link{
+  padding: 0 10px;
+}
+
 #toolbar {
   text-align: center;
 }
