@@ -4,7 +4,7 @@ This directory is used to push a user's code to their fork of the [kill-the-muta
 
 ## Structure
 
-The Tests.java file that will be used in the container is added in the temporary directory 'tmp'. Here is a look at the file structure:
+The Tests.java file that will be used in the container is added to the temporary directory 'tmp'. After a successful run, it is deleted. Here is a look at the file structure:
 
 ```
 docker
@@ -12,20 +12,14 @@ docker
 │   Dockerfile              // build a docker container for the script
 |   run.sh                  // script to push and test code
 │
-├───tmp
-    ├───USERNAME                  // the username of the tester in question
-    │   ├───TESTNAME              // the name of the example test
-    │   │   ├───TIMESTAMP1        // the time the test was submitted
-    │   │   │   │   Tests.java    // file to upload
-    │   │   │
-    │   │   ├───TIMESTAMP2
-    │   │   │   │   Tests.java
-    │   │   │
-    │   │   │...
-    │   │
-    │   │...
+└───tmp
+    ├───USERNAME-TESTNAME-TIMESTAMP1      // deleted after successful run
+    │   │   Tests.java                    // file to upload
     │
-    │...
+    ├───USERNAME-TESTNAME-TIMESTAMP2
+    │   │   Tests.java
+    │
+    │ ...
 ```
 
 ## How to run
