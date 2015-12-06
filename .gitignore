@@ -31,5 +31,8 @@ public/bower_components
 #Private files
 lib/api.json
 
-# Weird sequelize generated stuff
+# Sequelize generated files
 127.0.0.1
+
+# Temporary files submitted by users
+tmp
