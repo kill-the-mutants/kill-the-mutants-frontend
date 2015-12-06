@@ -25,7 +25,6 @@ RUN git clone https://github.com/${USERNAME}/kill-the-mutants
 WORKDIR /kill-the-mutants
 
 # copy over user's test suite
-ENV TESTPATH ${TESTNAME}/${TIMESTAMP}
-COPY tmp/${USERNAME}/${TESTPATH} ./${TESTPATH}
+COPY tmp/${USERNAME}-${TESTNAME}-${TIMESTAMP} ./${TESTNAME}/${TIMESTAMP}
 
 CMD ../run.sh
