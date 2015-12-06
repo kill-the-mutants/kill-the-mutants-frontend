@@ -1,13 +1,5 @@
 $(document).ready(function() {
-  $('#btn-compile').click(function() {
-    // Do we even want a compile button? What if either the #btn-run or #btn-kill-mutants
-    // first attempts to compile and if there's an error, it just returns that output.
-    console.log('Compiling code...');
-    compile(getCode());
-    console.log('Done!');
-    return false;
-  });
-  $('#btn-run').click(function() {
+  $('#run-tests').click(function() {
     // TODO: If we keep the compile button, perhaps keep this disabled until a successful
     // compiilation has occured and no further changes to the tests have been made.
     console.log('Running tests...');
@@ -15,7 +7,7 @@ $(document).ready(function() {
     console.log('Done!');
     return false;
   });
-  $('#btn-kill-mutants').click(function() {
+  $('#mutation-test').click(function() {
     // TODO: If we keep the compile button, perhaps keep this disabled until a successful
     // compiilation has occured and no further changes to the tests have been made.
     console.log('Killing mutants...');
