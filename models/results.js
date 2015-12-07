@@ -14,15 +14,31 @@ module.exports = function(sequelize, DataTypes) {
     },
     total_mutants: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     killed_mutants: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     tests_work: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    code: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    stdout: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    stderr: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     classMethods: {

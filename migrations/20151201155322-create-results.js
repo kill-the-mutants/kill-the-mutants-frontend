@@ -14,15 +14,31 @@ module.exports = {
       },
       total_mutants: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       killed_mutants: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       tests_work: {
         type: Sequelize.BOOLEAN,
         allowNull: false
+      },
+      duration: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      code: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      stdout: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      stderr: {
+        type: Sequelize.TEXT,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
