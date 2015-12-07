@@ -34,7 +34,7 @@ function mutationTest(testsCode, testName) {
     success: function(data) {
       $('#progress-indicator').slideUp();
       setContent('console', data.output);
-      ig.game.startGame(data.score);
+      if(data.score !== undefined) ig.game.startGame(data.score);
     }
   });
 }
