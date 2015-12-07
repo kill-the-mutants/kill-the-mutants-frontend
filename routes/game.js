@@ -51,7 +51,7 @@ router.post('/run-tests', function(req, res) {
 
   // build and run docker container
   docker.execute(user, testname, false, 'junit', code, function(docker_arguments, stdout, stderr) {
-    clean_tests_output(stdout, stderr, function(output) {
+    parse_tests_output(stdout, stderr, function(output) {
       console.log(output);
       res.send({
         output: output
@@ -74,20 +74,34 @@ router.post('/mutation-test', function(req, res) {
 
   // build and run docker container
   docker.execute(user, testname, true, 'pit', code, function(docker_arguments, stdout, stderr) {
+    parse_mutation_output(stdout, stderr, function(output, tests_work, total_mutants, killed_mutants, duration) {
+      console.log(output);
 
-    // mutation testing was run; add to the database
-    results.store_results(user, testname, code, docker_arguments, stdout, stderr, function(db_output, err){
-      clean_mutation_output(stdout, stderr, function(output) {
-        console.log(output);
+      var resultsObj = {
+        user: user,
+        testname: testname,
+        timestamp: docker_arguments.timestamp,
+        total_mutants: total_mutants,
+        killed_mutants: killed_mutants,
+        tests_work: tests_work,
+        duration: duration,
+        code: code,
+        stdout: stdout,
+        stderr: stderr
+      };
+
+      // mutation testing was run; add to the database
+      results.store_results(resultsObj, function(db_output, err){
         res.send({
-          output: output
+          output: output,
+          score: (killed_mutants / total_mutants) * 100
         });
       });
     });
   });
 });
 
-function clean_tests_output(stdout, stderr, callback) {
+function parse_tests_output(stdout, stderr, callback) {
   var compileRegExp = new RegExp(/(?=.*|\s).*\/Tests.java:.*\n(?:[ ]*.*\n)*(\d errors?)/g);
   var compileErrs = stderr.match(compileRegExp);
 
@@ -111,22 +125,53 @@ function clean_tests_output(stdout, stderr, callback) {
   callback(output);
 }
 
-function clean_mutation_output(stdout, stderr, callback) {
+function parse_mutation_output(stdout, stderr, callback) {
   var compileRegExp = new RegExp(/(?=.*|\s).*\/Tests.java:.*\n(?:[ ]*.*\n)*(\d errors?)/g);
   var compileErrs = stderr.match(compileRegExp);
+  var tests_work, total_mutants, killed_mutants, duration;
 
   // clean stderr
   if (compileErrs !== null) {
     stderr = compileErrs[0];
+    tests_work = false;
   } else if (stderr.includes("All tests did not pass without mutation when calculating line coverage. Mutation testing requires a green suite.")) {
     stderr = "Your test suite is not currently passing!\nPlease click \"Run Tests\" in order to see information on the failing test(s).";
+    tests_work = false;
   } else {
+    total_mutants = parse_total_mutants(stdout);
+    killed_mutants = parse_killed_mutants(stdout);
+    duration = parse_duration(stdout);
+    tests_work = true;
     stderr = null;
   }
 
   // return stderr if present, otherwise stdout
   var output = (stderr !== null) ? stderr : stdout;
-  callback(output);
+  callback(output, tests_work, total_mutants, killed_mutants, duration);
+}
+
+function parse_duration(stdout) {
+  var regExp = new RegExp(/Total.*(\d+)/i);
+  var time = stdout.match(regExp);
+  if(time && time[1])
+    return parseInt(time[1]);
+  return undefined;
+}
+
+function parse_total_mutants(stdout) {
+  var regExp = new RegExp(/(?:Generated (\d+) mutations Killed (\d+))/i);
+  var mutants = stdout.match(regExp);
+  if(mutants && mutants[1])
+    return parseInt(mutants[1]);
+  return undefined;
+}
+
+function parse_killed_mutants(stdout) {
+  var regExp = new RegExp(/(?:Generated (\d+) mutations Killed (\d+))/i);
+  var mutants = stdout.match(regExp);
+  if(mutants && mutants[2])
+    return parseInt(mutants[2]);
+  return undefined;
 }
 
 module.exports = router;
