@@ -12,34 +12,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       isAlphanumeric: true
     },
-    total_mutants: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    killed_mutants: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     tests_work: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
+    duration: DataTypes.INTEGER,
     code: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    stdout: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    stderr: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    }
+    stdout: DataTypes.TEXT,
+    stderr: DataTypes.TEXT,
+    total_mutants: DataTypes.INTEGER,
+    killed_mutants: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

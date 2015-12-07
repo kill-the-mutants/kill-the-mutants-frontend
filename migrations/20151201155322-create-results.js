@@ -12,41 +12,26 @@ module.exports = {
         primaryKey: true,
         allowNull: false
       },
-      total_mutants: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
-      killed_mutants: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
       tests_work: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
-      duration: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
+      duration: Sequelize.INTEGER,
       code: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      stdout: {
-        type: Sequelize.TEXT,
-        allowNull: true
-      },
-      stderr: {
-        type: Sequelize.TEXT,
-        allowNull: true
-      },
+      stdout: Sequelize.TEXT,
+      stderr: Sequelize.TEXT,
+      total_mutants: Sequelize.INTEGER,
+      killed_mutants: Sequelize.INTEGER,
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
   },
