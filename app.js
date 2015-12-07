@@ -6,7 +6,6 @@ var handlebars = require('express-handlebars');
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
-var mongoose = require('mongoose');
 var morgan = require('morgan');
 
 var index = require('./routes/index');
