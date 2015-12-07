@@ -10,6 +10,7 @@ $(document).ready(function() {
 });
 
 function runTests(testsCode, testName) {
+  $('#progress-indicator').slideDown();
   $.ajax({
     url: '/game/run-tests',
     type: 'POST',
@@ -18,17 +19,20 @@ function runTests(testsCode, testName) {
       testName: testName
     },
     success: function(data) {
+      $('#progress-indicator').slideUp();
       setContent('console', data.output);
     }
   });
 }
 
 function mutationTest(testsCode, testName) {
+  $('#progress-indicator').slideDown();
   $.ajax({
     url: '/game/mutation-test',
     type: 'POST',
     data: { code: testsCode },
     success: function(data) {
+      $('#progress-indicator').slideUp();
       setContent('console', data.output);
       ig.game.startGame(); //TODO pass success rate
     }

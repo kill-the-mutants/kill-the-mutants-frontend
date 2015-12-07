@@ -22,3 +22,6 @@ a.mdl-navigation__link:hover {
 .mdl-layout__header .mdl-layout__drawer-button {
   background-color: transparent;
 }
+#progress-indicator {
+  display:none;
+}
