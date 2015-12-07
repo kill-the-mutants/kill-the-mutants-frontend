@@ -24,7 +24,7 @@ function runTests(testsCode, testName) {
     success: function(data) {
       // TODO this isn't outputting correctly
       console.log(data);
-      //setContent('console', data.stdout.stringify());
+      setContent('console', data.stderr || data.stdout);
     }
   });
 }
