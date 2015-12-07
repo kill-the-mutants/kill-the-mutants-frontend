@@ -10,8 +10,6 @@ EntityFire = ig.Entity.extend({
 	animSheet: new ig.AnimationSheet('media/fire.png', 90, 100),
 	size: {x:84, y:77},
 	offset: {x:18, y:18},
-	type: ig.Entity.TYPE.B,
-	collides: ig.Entity.COLLIDES.FIXED,
 	gravityFactor: 0,
 
 	init: function(x, y, settings){
@@ -35,6 +33,11 @@ EntityFire = ig.Entity.extend({
 				this.plumeTimer.set(Math.random() * 4);
 			}
 		}
+	},
+
+	resize: function(OLD_SCREEN_WIDTH, OLD_SCREEN_HEIGHT, NEW_SCREEN_WIDTH, NEW_SCREEN_HEIGHT) {
+		this.pos.x = (this.pos.x / OLD_SCREEN_WIDTH) * NEW_SCREEN_WIDTH;
+		this.pos.y = NEW_SCREEN_HEIGHT - this.size.y;
 	}
 });
 

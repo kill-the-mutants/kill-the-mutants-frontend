@@ -30,6 +30,11 @@ EntityPlayer = ig.Entity.extend({
 	update: function() {
 		this.parent();
 		this.checkBounds();
+	},
+
+	resize: function(OLD_SCREEN_WIDTH, OLD_SCREEN_HEIGHT, NEW_SCREEN_WIDTH, NEW_SCREEN_HEIGHT) {
+		this.pos.x = (this.pos.x / OLD_SCREEN_WIDTH) * NEW_SCREEN_WIDTH;
+		this.pos.y = (this.pos.y / OLD_SCREEN_HEIGHT) * NEW_SCREEN_HEIGHT;
 	}
 });
 

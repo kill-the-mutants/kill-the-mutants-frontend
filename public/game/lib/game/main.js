@@ -40,6 +40,8 @@ MyGame = ig.Game.extend({
 		ig.EntityPool.enableFor(EntityPlayer);
 
 		this.pitLength = (this.SCREEN_WIDTH * 1/2) + (this.SCREEN_WIDTH * 1/4);
+
+		window.addEventListener('resize', this.resize, false);
 	},
 
 	spawnMutants: function(amount, successRate){
@@ -66,7 +68,7 @@ MyGame = ig.Game.extend({
 
 		for(var i=0; i<amount; i++) {
 			// randomly add to the center of the screen
-			randPosX = (Math.random() * ig.game.pitLength) + (ig.game.SCREEN_WIDTH - ig.game.pitLength)/2;
+			randPosX = (Math.random() * this.pitLength) + (this.SCREEN_WIDTH - this.pitLength)/2;
 			fire = this.spawnEntity(EntityFire, randPosX, this.SCREEN_HEIGHT);
 			fire.pos.y = this.SCREEN_HEIGHT - fire.size.y;
 
@@ -77,7 +79,7 @@ MyGame = ig.Game.extend({
 	startGame: function(entity) {
 		this.player = this.spawnEntity(EntitySde, 10, 10);
 		this.spawnMutants(20,.6);
-		this.spawnFire(2000);
+		this.spawnFire(20);
 		this.state = this.GAME;
 		$('#canvas').show();
 	},
@@ -140,6 +142,24 @@ MyGame = ig.Game.extend({
 				this.font.draw('Final Score: ' + this.score + '\nPress SPACE, L, or S to restart!', window.innerWidth/2, window.innerHeight/2, ig.Font.ALIGN.CENTER);
 				break;
 		}
+	},
+
+	resize: function() {
+		// update entities based on old sizes
+		for(fire of ig.game.fires) {
+			fire.resize(ig.game.SCREEN_WIDTH, ig.game.SCREEN_HEIGHT, window.innerWidth, window.innerHeight);
+		}
+		for(mutant of ig.game.mutants) {
+			mutant.resize(ig.game.SCREEN_WIDTH, ig.game.SCREEN_HEIGHT, window.innerWidth, window.innerHeight);
+		}
+
+		// update screen size
+		ig.game.SCREEN_WIDTH = window.innerWidth;
+		ig.game.SCREEN_HEIGHT = window.innerHeight;
+		ig.system.resize(ig.game.SCREEN_WIDTH, ig.game.SCREEN_HEIGHT, 1);
+
+		// update variables based on new sizes
+		this.pitLength = (ig.game.SCREEN_WIDTH * 1/2) + (ig.game.SCREEN_WIDTH * 1/4);
 	}
 });
 
