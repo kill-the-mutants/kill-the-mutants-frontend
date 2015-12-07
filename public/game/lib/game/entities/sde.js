@@ -12,7 +12,6 @@ EntitySde = EntityPlayer.extend({
 	animSheet: new ig.AnimationSheet('media/sde.png',100,159),
 	size: {x: 100, y: 159},
 	checkAgainst: ig.Entity.TYPE.A,
-
 	maxVel: {x: 500, y: 500},
 
 	init: function(x, y, settings) {

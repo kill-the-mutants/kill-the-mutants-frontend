@@ -33,6 +33,9 @@ MyGame = ig.Game.extend({
 
 	mutants: [],
 	fires: [],
+	sde: null,
+	killCount: 0,
+	mutantCount: 20,
 
 	init: function() {
 		ig.input.bind(ig.KEY.SPACE, 'space');
@@ -48,12 +51,17 @@ MyGame = ig.Game.extend({
 		var randPosY;
 		var mutant;
 		var cuttoff = Math.floor(amount*successRate);
+		console.log('amount', amount);
+		console.log('successRate', successRate);
+		console.log('cuttoff', cuttoff);
 
 		for(var i=0; i<amount; i++) {
-			randPosY = Math.random() * this.SCREEN_HEIGHT;
-			mutant = this.spawnEntity(EntityMutant, this.SCREEN_WIDTH - 100, this.SCREEN_HEIGHT - randPosY);
+			randPosY = Math.random() * this.SCREEN_HEIGHT*3/4;
+			mutant = this.spawnEntity(EntityMutant, this.SCREEN_WIDTH, this.SCREEN_HEIGHT - randPosY);
+			mutant.pos.x = this.SCREEN_WIDTH + mutant.size.x*2;
 			mutant.vel.x = Math.random() * -100 - 100;
 
+			mutant.willDie = false;
 			if(i >= cuttoff) {
 				mutant.willDie = true;
 			}
@@ -76,9 +84,14 @@ MyGame = ig.Game.extend({
 		}
 	},
 
-	startGame: function(entity) {
-		this.player = this.spawnEntity(EntitySde, 10, 10);
-		this.spawnMutants(20,.6);
+	startGame: function(score) {
+		this.mutants = [];
+		this.killCount = 0;
+		var successRate = (100-score)/100;
+		this.score = score;
+		this.sde = this.spawnEntity(EntitySde, 10, -10);
+		this.sde.pos.y = 0 - this.sde.size.y;
+		this.spawnMutants(this.mutantCount, successRate);
 		this.spawnFire(20);
 		this.state = this.GAME;
 		$('#canvas').show();
@@ -91,16 +104,11 @@ MyGame = ig.Game.extend({
 	startCoding: function() {
 		this.state = this.CODE;
 
-		for(fire of this.fires) {
-			fire.kill();
-		}
-
-		for(mutant of this.mutants) {
-			mutant.kill();
-		}
+		if(this.sde)								{ this.sde.kill(); }
+		for(fire of this.fires)			{ fire.kill(); }
+		for(mutant of this.mutants) { mutant.kill(); }
 
 		// wait until nice explosions are done
-		// $('#canvas').delay(10000).hide();
 		$('#canvas').delay(800).queue(function (next) {
 	    $(this).hide();
 	    next();
@@ -114,6 +122,11 @@ MyGame = ig.Game.extend({
 		switch(this.state){
 			case this.CODING:
 				if(ig.input.state("space")) this.startGame();
+				break;
+			case this.GAME:
+			console.log('killCount',this.killCount);
+			console.log('mutantCount',this.mutantCount)
+				if(this.killCount >= this.mutantCount) this.endGame();
 				break;
 			case this.GAME_OVER:
 				if(ig.input.state("space")) this.startCoding();
@@ -139,7 +152,7 @@ MyGame = ig.Game.extend({
 		// HUD
 		switch(this.state) {
 			case this.GAME_OVER:
-				this.font.draw('Final Score: ' + this.score + '\nPress SPACE, L, or S to restart!', window.innerWidth/2, window.innerHeight/2, ig.Font.ALIGN.CENTER);
+				this.font.draw('You killed ' + Math.floor(this.score) + '% of the total mutants!\nPress SPACE to try again!', window.innerWidth/2, window.innerHeight/2, ig.Font.ALIGN.CENTER);
 				break;
 		}
 	},
@@ -160,7 +173,12 @@ MyGame = ig.Game.extend({
 
 		// update variables based on new sizes
 		this.pitLength = (ig.game.SCREEN_WIDTH * 1/2) + (ig.game.SCREEN_WIDTH * 1/4);
-	}
+	},
+
+	removeFromArray: function(obj, array){
+		var i = array.indexOf(obj);
+		if(i != -1) array.splice(i,1);
+	},
 });
 
 ig.main( '#canvas', MyGame, 60, window.innerWidth, window.innerHeight, 1 );

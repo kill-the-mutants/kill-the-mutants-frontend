@@ -14,12 +14,13 @@ EntityMutant = EntityPlayer.extend({
 	offset: {x: 5, y: 10},
 	type: ig.Entity.TYPE.A,
 
-	// predetermin the mutant's fate
-	willDie: false,
+	// predetermine the mutant's fate
 	deathLocation: -100,
 
 	init: function(x, y, settings){
 		this.parent(x, y, settings);
+
+		this.willDie = false;
 
 		// 1	- play each frame for 1 second
 		// [0]	- the animation consists of only fram 0
@@ -56,6 +57,7 @@ EntityMutant = EntityPlayer.extend({
 
 	kill: function() {
 		ig.game.spawnEntity(EntityExplosion, this.pos.x, this.pos.y);
+		ig.game.killCount++;
 		this.parent();
 	}
 });

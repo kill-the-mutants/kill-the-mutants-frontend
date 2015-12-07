@@ -34,7 +34,7 @@ function mutationTest(testsCode, testName) {
     success: function(data) {
       $('#progress-indicator').slideUp();
       setContent('console', data.output);
-      ig.game.startGame(); //TODO pass success rate
+      ig.game.startGame(data.score);
     }
   });
 }
