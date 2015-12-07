@@ -51,24 +51,6 @@ router.post('/run-tests', function(req, res) {
 
   docker.execute(user, testname, false, 'junit', code, function(docker_arguments, stdout, stderr) {
 
-    fs.writeFile(__dirname + '/../lib/tmp/test/err.txt', stderr, function(error) {
-      if (error) {
-        console.log("Could not save stderr.");
-        console.log(error);
-      } else {
-        console.log("Saved stderr!");
-      }
-    });
-
-    fs.writeFile(__dirname + '/../lib/tmp/test/out.txt', stdout, function(error) {
-      if (error) {
-        console.log("Could not save stdout.");
-        console.log(error);
-      } else {
-        console.log("Saved stdout!");
-      }
-    });
-
     var compileRegExp = new RegExp(/(?=.*|\s).*\/Tests.java:.*\n(?:[ ]*.*\n)*(\d errors?)/g);
     var compileErrs = stderr.match(compileRegExp);
 
@@ -112,24 +94,24 @@ router.post('/mutation-test', function(req, res) {
     // mutation testing was run; add to the database
     results.store_results(user, testname, code, docker_arguments, stdout, stderr, function(db_output, err){
 
-      // fs.writeFile(__dirname + '/../lib/tmp/test/err.txt', stderr, function(error) {
-      //   if (error) {
-      //     console.log("Could not save stderr.");
-      //     console.log(error);
-      //   } else {
-      //     console.log("Saved stderr!");
-      //   }
-      // });
-      //
-      //
-      // fs.writeFile(__dirname + '/../lib/tmp/test/out.txt', stdout, function(error) {
-      //   if (error) {
-      //     console.log("Could not save stdout.");
-      //     console.log(error);
-      //   } else {
-      //     console.log("Saved stdout!");
-      //   }
-      // });
+      fs.writeFile(__dirname + '/../lib/tmp/test/err.txt', stderr, function(error) {
+        if (error) {
+          console.log("Could not save stderr.");
+          console.log(error);
+        } else {
+          console.log("Saved stderr!");
+        }
+      });
+
+
+      fs.writeFile(__dirname + '/../lib/tmp/test/out.txt', stdout, function(error) {
+        if (error) {
+          console.log("Could not save stdout.");
+          console.log(error);
+        } else {
+          console.log("Saved stdout!");
+        }
+      });
 
       var compileRegExp = new RegExp(/(?=.*|\s).*\/Tests.java:.*\n(?:[ ]*.*\n)*(\d errors?)/g);
       var compileErrs = stderr.match(compileRegExp);
