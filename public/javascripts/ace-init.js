@@ -37,7 +37,7 @@ snippetView.setTheme("ace/theme/cobalt");
 snippetView.getSession().setMode("ace/mode/java");
 snippetView.setOptions({
     maxLines: determineMaxLines(0.5),
-    readOnly: false,
+    readOnly: true,
     highlightActiveLine: false,
     highlightGutterLine: false,
     showPrintMargin: false
@@ -47,10 +47,10 @@ snippetView.renderer.$cursorLayer.element.style.opacity=0;
 
 var consoleView = ace.edit("console");
 consoleView.setTheme("ace/theme/cobalt");
-consoleView.getSession().setMode("ace/mode/java");
+consoleView.getSession().setMode("ace/mode/text");
 consoleView.setOptions({
     maxLines: determineMaxLines(0.5, 16),
-    readOnly: false,
+    readOnly: true,
     highlightActiveLine: false,
     highlightGutterLine: false,
     showPrintMargin: false

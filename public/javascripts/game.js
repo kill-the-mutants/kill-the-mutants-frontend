@@ -2,48 +2,34 @@ $(document).ready(function() {
   $('#run-tests').click(function() {
     // TODO: If we keep the compile button, perhaps keep this disabled until a successful
     // compiilation has occured and no further changes to the tests have been made.
-    console.log('Running tests...');
-    runTests(getCode());
-    console.log('Done!');
+    runTests(getContent('editor'));
     return false;
   });
   $('#mutation-test').click(function() {
     // TODO: If we keep the compile button, perhaps keep this disabled until a successful
     // compiilation has occured and no further changes to the tests have been made.
-    console.log('Killing mutants...');
-    mutationTest(getCode());
-    console.log('Done!');
+    mutationTest(getContent('editor'));
     return false;
   });
 });
 
-function compile(testsCode) {
-  $.ajax({
-    url: '/game/compile',
-    type: 'POST',
-    data: { code: testsCode },
-    success: function(data) {
-      // TODO: do something meaningful with response
-      // In this case, should probably place the compiler output into a new view
-      console.log(data);
-    }
-  });
-}
-
-function runTests(testsCode) {
+function runTests(testsCode, testName) {
   $.ajax({
     url: '/game/run-tests',
     type: 'POST',
-    data: { code: testsCode },
+    data: {
+      code: testsCode,
+      testName: testName
+    },
     success: function(data) {
-      // TODO: do something meaningful with response
-      // In this case, should probably place the test results into a new view
+      // TODO this isn't outputting correctly
       console.log(data);
+      //setContent('console', data.stdout.stringify());
     }
   });
 }
 
-function mutationTest(testsCode) {
+function mutationTest(testsCode, testName) {
   $.ajax({
     url: '/game/mutation-test',
     type: 'POST',
@@ -52,17 +38,23 @@ function mutationTest(testsCode) {
       // TODO: do something meaningful with response
       // In this case, should probably place the mutation test results into a new view
       console.log(data);
+      setContent('console', data.stderr || data.stdout);
     }
   });
 }
 
+// function getExampleName() {
+//   var pathElts = location.pathname.split('/');
+//   console.log(pathElts[pathElts.length - 1]);
+// }
+
 // Helper function
-function getCode() {
-  return ace.edit('editor').getValue();
+function getContent(editorId) {
+  return ace.edit(editorId).getValue();
 }
 
 // Helper function, not sure if we need it but may be useful if we wanted to do something cool like
 // placing the compiler errors/warnings inline with the code the user edits
-function setCode(replacementCode) {
-  ace.edit('editor').setValue(replacementCode);
+function setContent(editorId, replacementContent) {
+  ace.edit(editorId).setValue(replacementContent);
 }
