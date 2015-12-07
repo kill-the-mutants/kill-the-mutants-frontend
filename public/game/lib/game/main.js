@@ -51,9 +51,6 @@ MyGame = ig.Game.extend({
 		var randPosY;
 		var mutant;
 		var cuttoff = Math.floor(amount*successRate);
-		console.log('amount', amount);
-		console.log('successRate', successRate);
-		console.log('cuttoff', cuttoff);
 
 		for(var i=0; i<amount; i++) {
 			randPosY = Math.random() * this.SCREEN_HEIGHT*3/4;
@@ -124,8 +121,6 @@ MyGame = ig.Game.extend({
 				if(ig.input.state("space")) this.startGame();
 				break;
 			case this.GAME:
-			console.log('killCount',this.killCount);
-			console.log('mutantCount',this.mutantCount)
 				if(this.killCount >= this.mutantCount) this.endGame();
 				break;
 			case this.GAME_OVER:
