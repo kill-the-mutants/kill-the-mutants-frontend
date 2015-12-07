@@ -152,22 +152,25 @@ function parse_mutation_output(stdout, stderr, callback) {
 
 function parse_duration(stdout) {
   var regExp = new RegExp(/Total.*(\d+)/i);
-  if(regExp && regExp[1])
-    return parseInt(regExp[1]);
+  var time = stdout.match(regExp);
+  if(time && time[1])
+    return parseInt(time[1]);
   return undefined;
 }
 
 function parse_total_mutants(stdout) {
   var regExp = new RegExp(/(?:Generated (\d+) mutations Killed (\d+))/i);
-  if(regExp && regExp[1])
-    return parseInt(mutantsRegExp[1]);
+  var mutants = stdout.match(regExp);
+  if(mutants && mutants[1])
+    return parseInt(mutants[1]);
   return undefined;
 }
 
 function parse_killed_mutants(stdout) {
   var regExp = new RegExp(/(?:Generated (\d+) mutations Killed (\d+))/i);
-  if(regExp && regExp[2])
-    return parseInt(mutantsRegExp[2]);
+  var mutants = stdout.match(regExp);
+  if(mutants && mutants[2])
+    return parseInt(mutants[2]);
   return undefined;
 }
 
