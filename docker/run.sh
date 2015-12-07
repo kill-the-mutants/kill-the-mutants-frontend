@@ -15,7 +15,6 @@ TEST_TOOL=${2:-$TEST_TOOL}
 
 # git push if specified
 if [ "$GIT_PUSH" = true ]; then
-  echo 'GIT PUSH'
 
   # check required environment variables
   if [ -z ${NAME+x} ] ||
@@ -32,7 +31,7 @@ if [ "$GIT_PUSH" = true ]; then
   git config --global user.email ${EMAIL}
 
   git add .
-  git commit -m 'or... whatever'
+  git commit -m "Automatically committed using Kill the Mutants"
   git push "https://${USERNAME}:${ACCESS_TOKEN}@github.com/${USERNAME}/kill-the-mutants"
 fi
 
