@@ -93,7 +93,7 @@ router.post('/mutation-test', function(req, res) {
       // mutation testing was run; add to the database
       results.store_results(resultsObj, function(db_output, err){
         res.send({
-          output: output,
+          output: output, 
           score: (killed_mutants / total_mutants) * 100
         });
       });

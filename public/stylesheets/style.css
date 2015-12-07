@@ -12,6 +12,9 @@ a.mdl-layout-title {
   text-decoration:none;
   color: white;
 }
+a.mdl-navigation__link {
+  text-decoration: none;
+}
 a.mdl-navigation__link:hover {
   text-decoration: none;
   color: #FFAB40;
