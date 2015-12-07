@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="/stylesheets/signup.css">
   {{/if}} {{#if view_game}}
   <link rel="stylesheet" href="/stylesheets/game.css">
+  <script type="text/javascript" src="/game/lib/impact/impact.js"></script>
+	<script type="text/javascript" src="/game/lib/game/main.js"></script>
   {{/if}} {{#if view_survey}}
   <link rel="stylesheet" href="/stylesheets/floating-form.css">
   {{/if}}
@@ -84,5 +86,6 @@
   {{/if}} {{#if view_survey}}
   <script src="/javascripts/survey.js"></script>
   {{/if}}
-  </body>
-  </html>
+<canvas id="canvas"></canvas>
+</body>
+</html>
