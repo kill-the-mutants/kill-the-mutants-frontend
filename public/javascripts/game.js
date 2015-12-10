@@ -34,7 +34,10 @@ function mutationTest(testsCode, testName) {
     success: function(data) {
       $('#progress-indicator').slideUp();
       setContent('console', data.output);
-      if(data.score !== undefined && data.score !== NaN && data.score !== null){
+      // a slightly cleaner version of this check might be:
+      // if (isNan(data.score) && typeof data.score === "number")
+      // surprisingly, "typeof NaN" returns "number" so that's why you'd need the extra check
+      if(!isNaN(data.score) && typeof data.score === "number") {
         console.log(data.score);
         ig.game.startGame(data.score);
       }

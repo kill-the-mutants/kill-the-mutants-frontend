@@ -29,11 +29,11 @@ app.use(express.static(__dirname + '/public'));
 
 // Middleware to set a variable accessible from front end representing
 // whether the current session user is logged in or not.
-function loggedIn(req, res, next) {
+function adjustViewForLogin(req, res, next) {
     res.locals.loggedIn = false;
     if (req.session.user) {
-        res.locals.loggedIn = true;
-        res.locals.username = req.session.user.login;
+      res.locals.loggedIn = true;
+      res.locals.username = req.session.user.login;
     }
     next();
 }
@@ -46,7 +46,7 @@ app.use(session({
 }));
 
 // Custom Middleware
-app.use(loggedIn);
+app.use(adjustViewForLogin);
 
 // Flash Support.
 app.use(flash());

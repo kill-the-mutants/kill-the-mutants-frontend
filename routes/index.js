@@ -3,15 +3,12 @@ var router = express.Router();
 
 router.get('/', function(req, res) {
   var user = req.session.user;
-  if (!user) {
-    res.locals.view_home = true;
-    res.render('home', { title: "Kill the Mutants" });
-  } else if (!user.completed_signup) {
+  if (user && !user.completed_signup) {
     res.redirect('/users/complete-signup');
-  } else if (!user.completed_presurvey){
+  } else if (user && !user.completed_presurvey){
     res.redirect('/users/pre-survey');
   } else {
-    res.redirect('/game');
+    res.redirect('/home');
   }
 });
 
@@ -27,6 +24,11 @@ router.get('/login', function(req, res) {
 router.get('/logout', function(req, res) {
   req.session.destroy();
   res.redirect('/');
+});
+
+router.get('/home', function(req, res) {
+  res.locals.view_home = true;
+  res.render('home', { title: "Kill the Mutants" });
 });
 
 module.exports = router;

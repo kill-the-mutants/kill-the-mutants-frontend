@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/bower_components/Waves/dist/waves.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
 
-  <!-- Conidtional CSS/JS for subtemplates -->
+  <!-- Conditional CSS/JS for subtemplates -->
   {{#if view_home}}
   <link rel="stylesheet" href="/stylesheets/home.css">
   {{/if}} {{#if view_signup}}
@@ -85,13 +85,14 @@
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/bower_components/Waves/dist/waves.min.js"></script>
   <script src="/javascripts/waves-init.js"></script>
+  <script src="/javascripts/main.js"></script>
   {{#if view_game}}
   <script src="/bower_components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/ace-init.js"></script>
   <script src="/javascripts/game.js"></script>
+<canvas id="canvas"></canvas>
   {{/if}} {{#if view_survey}}
   <script src="/javascripts/survey.js"></script>
   {{/if}}
-<canvas id="canvas"></canvas>
 </body>
 </html>

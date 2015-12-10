@@ -30,11 +30,7 @@ router.post('/complete-signup', function(req, res) {
         res.render('500', {error: JSON.stringify(err)});
       } else {
         req.session.user = user;
-        if (!user.completed_presurvey) {
-          res.redirect('/users/pre-survey');
-        } else {
-          res.redirect('/game');
-        }
+        res.redirect('/');
       }
     });
   }
@@ -42,24 +38,20 @@ router.post('/complete-signup', function(req, res) {
 
 router.get('/pre-survey', function(req, res) {
   var user = req.session.user;
-  if (!user) {
+  if (!user || !user.completed_signup || user.completed_presurvey) {
     res.redirect('/');
-  } else if (!user.completed_signup) {
-    res.redirect('/users/complete-signup');
   } else {
     res.locals.view_survey = true;
     res.render('pre-survey', {
-      title: "KTM - Entry Survey",
+      title: "KTM - Entry Survey"
     });
   }
 });
 
 router.post('/pre-survey', function(req, res) {
   var user = req.session.user;
-  if (!user || user.completed_presurvey) {
+  if (!user || !user.completed_signup || user.completed_presurvey) {
     res.redirect('/');
-  } else if (!user.completed_signup) {
-    res.redirect('/complete-signup');
   } else {
     var options = {
       completed_presurvey: true

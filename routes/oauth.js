@@ -29,7 +29,7 @@ router.get('/callback', function(req, res) {
 
   if (user) {
     res.redirect('/');
-    return; // doing this to avoid lots of else statements and confusing braces
+    return;
   }
 
   var error = req.query.error;
@@ -57,13 +57,7 @@ router.get('/callback', function(req, res) {
     users.login(access_token, function(user) {
       res.cookie('access_token', data.access_token);
       req.session.user = user;
-      if (!user.completed_signup) {
-        res.redirect('/users/complete-signup');
-      } else if (!user.completed_presurvey) {
-        res.redirect('/users/pre-survey');
-      } else {
-        res.redirect('/');
-      }
+      res.redirect('/'); // this will handle any necessary additional redirects, e.g. completing signup
     });
   });
 });
