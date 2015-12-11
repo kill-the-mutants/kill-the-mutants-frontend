@@ -27,7 +27,7 @@ docker
 To push any code or run any test suite, you need to install Docker to your machine. Follow instructions to install Docker [here](https://docs.docker.com/installation/).
 
 *Mac and Windows Users:*  
-If you are using Mac OS X or Windows, make sure to run the Docker Quickstart Terminal.
+If you are using Mac OS X or Windows, make sure to run the Docker Quickstart Terminal. Your docker machine must have more than 500MB of memory as the JVM we run uses 500MB. We found that 1GB of memory and 2 processors worked best.
 
 All that's left is to build and run your container. Make sure you define the following build arguments and environment variables:
 
@@ -92,7 +92,7 @@ More commands can be found [here](https://github.com/wsargent/docker-cheat-sheet
 
 ###### "Help! My docker container hangs!"
 
-Unfortunately this problem can occur when running docker on Windows or Mac OS X machines. You will need to remove your docker-machine and create a new one with larger memory and more processors. We suggest at least 2 processors and 4096 MB memory. Here is how you can recreate your machine:
+This is a problem that we used to run into before we increased the memory of the JVM in the docker container. Our original idea was to increase the docker machine's memory, which while it helped, did not solve the actual problem. We wanted to keep these commands here for future reference. Note that these are only relevant on Mac OS X or Windows, as docker simply runs on your machine by itself if you are running Linux.
 
 ```
 docker-machine rm default
