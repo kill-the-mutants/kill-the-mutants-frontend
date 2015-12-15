@@ -15,7 +15,7 @@ router.get('/login', function(req, res) {
     var query = {
       client_id : tokens.GITHUB_CLIENT_ID,
       redirect_uri : uri,
-      scope : 'user,public_repo'
+      scope : 'public_repo'
     };
     res.redirect('https://github.com/login/oauth/authorize?' + querystring.stringify(query));
   } else {
